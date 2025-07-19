@@ -1,28 +1,37 @@
-# GraphQL schema example
-#
-# https://gqlgen.com/getting-started/
-
-type Todo {
-  id: ID!
-  text: String!
-  done: Boolean!
-  user: User!
-}
-
-type User {
+# type is a GraphQL entity definition
+type Category {
   id: ID!
   name: String!
+  description: String
+  courses: [Course!]!
+}
+
+type Course {
+  id: ID!
+  title: String!
+  description: String
+  category: Category!
 }
 
 type Query {
-  todos: [Todo!]!
+  categories: [Category!]!
+  courses: [Course!]! 
 }
 
-input NewTodo {
-  text: String!
-  userId: String!
+# input is a GraphQL input type definition
+input NewCategory { 
+  name: String!
+  description: String
 }
 
+input NewCourse {
+  title: String!
+  description: String
+  categoryID: ID!
+}
+
+# mutation is a GraphQL interface for modifying data
 type Mutation {
-  createTodo(input: NewTodo!): Todo!
+  createCategory(input: NewCategory!): Category!
+  createCourse(input: NewCourse!): Course!
 }
