@@ -17,7 +17,7 @@ type Course struct {
 	ID          string
 	Title       string
 	Description *string
-	CategoryID  *string
+	CategoryID  string
 }
 
 func (c *Course) Create(title string, description string, categoryID string) (*Course, error) {
@@ -28,15 +28,11 @@ func (c *Course) Create(title string, description string, categoryID string) (*C
 		return nil, err
 	}
 
-	if err != nil {
-		return nil, err
-	}
-
 	return &Course{
 		ID:          id,
 		Title:       title,
 		Description: &description,
-		CategoryID:  &categoryID,
+		CategoryID:  categoryID,
 	}, nil
 }
 
